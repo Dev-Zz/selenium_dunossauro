@@ -1,6 +1,7 @@
 from selenium.webdriver import Firefox
 from time import sleep
 from selenium.webdriver.common.by import By
+#cudovaldir
 
 url = 'https://curso-python-selenium.netlify.app/aula_03.html'
 
