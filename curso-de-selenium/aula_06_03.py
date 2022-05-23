@@ -6,4 +6,4 @@ url = 'http://selenium.dunossauro.live/aula_06_a.html'
 
 b.get(url)
 
-b.find_element_by_css_selector('div.form-group')
+b.find_elements_by_css_selector('div.form-group')
