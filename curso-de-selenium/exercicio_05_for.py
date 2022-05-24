@@ -2,11 +2,11 @@ from selenium.webdriver import Firefox
 from time import sleep
 
 b = Firefox()
-url = 'http://selenium.dunossauro.live/exercicio_06.html'
+url = 'http://selenium.dunossauro.live/exercicio_05.html'
 b.get(url)
-sleep(5)
 
-def preenche_form(browser, form, nome, senha):
+def preenche_form(browser, context, nome, senha):
+    sleep(1)
     context = browser.find_element_by_css_selector(f'.form-{form}')
     inputs_form = {
         'nome': context.find_element_by_css_selector('[type="text"]'),
@@ -18,8 +18,6 @@ def preenche_form(browser, form, nome, senha):
     inputs_form['senha'].send_keys(senha)
     inputs_form['enviar'].click()
 
-
-for n in range(6):
-    form = b.find_element_by_css_selector('span').text
-    sleep(5)
-    preenche_form(b, form, f'Jose{n}', f'Senha123{n}')
+forms = ['l0c0', 'l0c1', 'l1c0', 'l1c1']
+for form in forms:
+    preenche_form(b, form, 'Jose', 'Senha123')

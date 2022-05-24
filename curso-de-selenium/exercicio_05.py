@@ -3,29 +3,35 @@ from time import sleep
 
 b = Firefox()
 url = 'http://selenium.dunossauro.live/exercicio_05.html'
-
 b.get(url)
 
-classe = b.find_element_by_css_selector('form.form-l0c0')
-nome = b.find_element_by_css_selector('[type="text"]').send_keys('Jose')
-senha = b.find_element_by_css_selector('[type="password"]').send_keys('1643114#Ze')
-sleep(1.5)
-btn = b.find_element_by_css_selector('[type="submit"]').click()
+def preenche_form(context, nome, senha):
+#    sleep(1)
+#    context = browser.find_element_by_css_selector(f'.form-{form}')
+    inputs_form = {
+        'nome': context.find_element_by_css_selector('[type="text"]'),
+        'senha': context.find_element_by_css_selector('[type="password"]'),
+        'enviar': context.find_element_by_css_selector('[type="submit"]'),
+    }
 
-classe = b.find_element_by_css_selector('form.form-l0c1')
-nome = classe.find_element_by_css_selector('[type="text"]').send_keys('Josefson')
-senha = classe.find_element_by_css_selector('[type="password"]').send_keys('1643114#Ze')
-sleep(1.5)
-btn = classe.find_element_by_css_selector('[type="submit"]').click()
+    inputs_form['nome'].send_keys(nome)
+    inputs_form['senha'].send_keys(senha)
+    inputs_form['enviar'].click()
 
-classe = b.find_element_by_css_selector('form.form-l1c0')
-nome = classe.find_element_by_css_selector('[type="text"]').send_keys('Josefson')
-senha = classe.find_element_by_css_selector('[type="password"]').send_keys('1643114#Ze')
-sleep(1.5)
-btn = classe.find_element_by_css_selector('[type="submit"]').click()
+#forms = ['l0c0', 'l0c1', 'l1c0', 'l1c1']
 
-classe = b.find_element_by_css_selector('form.form-l1c1')
-nome = classe.find_element_by_css_selector('[type="text"]').send_keys('Josefson')
-senha = classe.find_element_by_css_selector('[type="password"]').send_keys('1643114#Ze')
+
+l0c0 = b.find_element_by_css_selector('.form-l0c0')
+preenche_form(l0c0, 'Jose', 'Senha123')
+
 sleep(1.5)
-btn = classe.find_element_by_css_selector('[type="submit"]').click()
+l0c1 = b.find_element_by_css_selector('.form-l0c1')
+preenche_form(l0c1, 'Jose1', '1Senha123')
+
+sleep(1.5)
+l1c0 = b.find_element_by_css_selector('.form-l1c0')
+preenche_form(l1c0, 'Jose2', '2Senha123')
+
+sleep(1.5)
+l1c1 = b.find_element_by_css_selector('.form-l1c1')
+preenche_form(l1c1, 'Jose3', '3Senha123')
