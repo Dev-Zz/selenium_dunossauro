@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Jose Eduardo\Desktop\Curso Selenium+Python\curso-de-selenium\venv
+set VIRTUAL_ENV=C:\Users\Jose Eduardo\Documents\GitHub\curso-de-selenium\curso-de-selenium\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

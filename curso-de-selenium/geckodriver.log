@@ -1322,6 +1322,7 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 DevTools listening on ws://localhost:59333/devtools/browser/d1df0836-bb3b-4ee2-8955-c350967c254f
 1652892049380	Marionette	INFO	Listening on port 59351
 1652892049573	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+<<<<<<< Updated upstream
 1653085020982	geckodriver	INFO	Listening on 127.0.0.1:49778
 1653085023948	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49779" "-no-remote" "-profile" "C:\\Users\\JOSEED~1\\AppData\\Local\\Temp\\rust_mozprofilePG1jcw"
 1653085024795	Marionette	INFO	Marionette enabled
@@ -2722,3 +2723,15 @@ console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message f
 JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
 console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://selenium.dunossauro.live"
 JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+=======
+1652923530199	geckodriver	INFO	Listening on 127.0.0.1:60762
+1652923533152	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "60763" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\JOSEED~1\\AppData\\Local\\Temp\\rust_mozprofile2sTpm1"
+1652923533937	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\JOSEED~1\\AppData\\Local\\Temp\\rust_mozprofile2sTpm1\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60763/devtools/browser/a53b4d9a-7d89-4b32-b210-5541986e8c8f
+1652923536346	Marionette	INFO	Listening on port 60788
+Read port: 60788
+1652923536370	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1652923581166	Marionette	INFO	Stopped listening on port 60788
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+>>>>>>> Stashed changes

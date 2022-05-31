@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Jose Eduardo\Desktop\Curso Selenium+Python\curso-de-selenium\venv"
+VIRTUAL_ENV="C:\Users\Jose Eduardo\Documents\GitHub\curso-de-selenium\curso-de-selenium\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
