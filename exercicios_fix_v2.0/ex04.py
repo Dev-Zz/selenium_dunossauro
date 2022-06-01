@@ -4,7 +4,7 @@ Preencher o formulário
 
 from selenium.webdriver import Firefox
 from time import sleep
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qsl
 
 
 url = 'https://curso-python-selenium.netlify.app/exercicio_04.html'
