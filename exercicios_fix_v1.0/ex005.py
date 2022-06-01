@@ -30,14 +30,15 @@ browser.get(url)
 sleep(1)
 
 #pag1
+sleep(0.7)
 l0c0 = browser.find_element_by_css_selector('[class="form-l0c0"]')
 preenche_form(l0c0, 'Jose', '123456')
-
+sleep(0.7)
 l0c1 = browser.find_element_by_css_selector('[class="form-l0c1"]')
-preenche_form(l0c0, 'Jose1', '1234561')
-
+preenche_form(l0c1, 'Jose1', '1234561')
+sleep(0.7)
 l1c0 = browser.find_element_by_css_selector('[class="form-l1c0"]')
-preenche_form(l0c0, 'Jose2', '1234562')
-
+preenche_form(l1c0, 'Jose2', '1234562')
+sleep(0.7)
 l1c1 = browser.find_element_by_css_selector('[class="form-l1c1"]')
-preenche_form(l0c0, 'Jose3', '1234564')
+preenche_form(l1c1, 'Jose3', '1234564')
