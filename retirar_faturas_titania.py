@@ -4,6 +4,13 @@ from time import sleep
 from selenium.webdriver import Firefox
 from datetime import datetime
 
+#Função para RETIRAR caracteres especiais de uma STRING.
+#chr_remove(s, "$(#") # remove $,# e ( da string
+def chr_remove(old, to_remove):
+    new_string = old
+    for x in to_remove:
+        new_string = new_string.replace(x, '')
+    return new_string
 
 #Lógica para pegar os dados: LOGIN, SENHA, OPERADORA, CÓDGO DE CLIENTE de cada TICKET.
 with urllib.request.urlopen("https://api.movidesk.com/public/v1/tickets?token=1f777488-5e9c-4330-8259-24ab5f6ac50b&id=7041") as url:
@@ -17,21 +24,25 @@ for interacao in data['actions']:
         descricao = interacao['htmlDescription']
 print(descricao)
 
+#Separar o LOGIN do JSON.
 login = re.search('LOGIN:&nbsp;(.*?)<', descricao, flags=re.IGNORECASE)
 if login is not None:
     login = login.group(1)
 print(login)
 
+#Separar o SENHA do JSON.
 senha = re.search('SENHA: (.*?)<', descricao, flags=re.IGNORECASE)
 if senha is not None:
     senha = senha.group(1)
 print(senha)
 
+#Separar a OPERADORA do JSON.
 operadora = re.search('OPERADORA: (.*?)<', descricao, flags=re.IGNORECASE)
 if operadora is not None:
     operadora = operadora.group(1)
 print(operadora)
 
+#Separar o CÓDIGO DO CLIENTE do JSON.
 cod_cliente = re.search('CÓDIGO DE CLIENTE:&nbsp;(.*?)<', descricao, flags=re.IGNORECASE)
 if cod_cliente is not None:
     cod_cliente = cod_cliente.group(1)
@@ -73,13 +84,14 @@ tbody = browser.find_element_by_css_selector('tbody')
 mes_titania = tbody.find_element_by_css_selector('td')
 mes_titania = int(mes_titania.text.split('/')[1].lstrip('0'))
 
-#FAZER O DOWNLOAD
+#Pegar o código do METODO POST.
 cod_boleto = tbody.find_element_by_css_selector('[class="btnboleto form-submit"]')
 cod_boleto = cod_boleto.get_attribute('onclick')
 cod_boleto = cod_boleto.split()
-cod_boleto = cod_boleto[0].strip('geturl_tela').strip('();''')
+cod_boleto = cod_boleto[0]
+cod_boleto = chr_remove(cod_boleto, "();'").strip('geturl_tela')
 
-#logica para COMPARAR os dados e fazer download da FATURA.
+#logica para COMPARAR os dados e ABRIR a URL do PDF.
 if mes == mes_titania:
     jsrequest = ('''var xhr = new XMLHttpRequest();
 xhr.open('POST', 'https://central.titania.com.br/sites/all/files/paginas/getdoc.php', false);
@@ -93,3 +105,4 @@ result = browser.execute_script(jsrequest)
 url_titania = 'https://central.titania.com.br'
 url_pdf = url_titania + result
 browser.get(url_pdf)
+
