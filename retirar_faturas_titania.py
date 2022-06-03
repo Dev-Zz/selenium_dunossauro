@@ -73,21 +73,23 @@ tbody = browser.find_element_by_css_selector('tbody')
 mes_titania = tbody.find_element_by_css_selector('td')
 mes_titania = int(mes_titania.text.split('/')[1].lstrip('0'))
 
-#logica para COMPARAR os dados e fazer download da FATURA.
-if mes == mes_titania:
-    tbody.find_element_by_css_selector('[value="Gerar Boleto"]').click()
-else:
-    print('MESÊS NÃO BATEM!!')
-
 #FAZER O DOWNLOAD
 cod_boleto = tbody.find_element_by_css_selector('[class="btnboleto form-submit"]')
 cod_boleto = cod_boleto.get_attribute('onclick')
 cod_boleto = cod_boleto.split()
-cod_boleto = cod_boleto[0].strip('geturl_tela').strip('();').strip('')
+cod_boleto = cod_boleto[0].strip('geturl_tela').strip('();''')
 
-jsrequest = '''var xhr = new XMLHttpRequest();
+#logica para COMPARAR os dados e fazer download da FATURA.
+if mes == mes_titania:
+    jsrequest = ('''var xhr = new XMLHttpRequest();
 xhr.open('POST', 'https://central.titania.com.br/sites/all/files/paginas/getdoc.php', false);
-xhr.send('method=boleto&param=AAC60VZ40O&server=integrator_documents');
-return xhr.response;'''
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
+xhr.send('method=boleto&param={}&server=integrator_documents');
+return xhr.response;'''.format(cod_boleto))
+else:
+    print('MESÊS NÃO BATEM!!')
 
 result = browser.execute_script(jsrequest)
+url_titania = 'https://central.titania.com.br'
+url_pdf = url_titania + result
+browser.get(url_pdf)
