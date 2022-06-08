@@ -81,6 +81,7 @@ else:
 data_atual = datetime.now()
 mes = data_atual.month
 tbody = browser.find_element_by_css_selector('tbody')
+#ALTERAR FORMA DE ENCONTRAR O MÊS DE REFERENCIA.
 mes_titania = tbody.find_element_by_css_selector('td')
 mes_titania = int(mes_titania.text.split('/')[1].lstrip('0'))
 
@@ -92,6 +93,7 @@ cod_boleto = cod_boleto[0]
 cod_boleto = chr_remove(cod_boleto, "();'").strip('geturl_tela')
 
 #logica para COMPARAR os dados e ABRIR a URL do PDF.
+
 if mes == mes_titania:
     jsrequest = ('''var xhr = new XMLHttpRequest();
 xhr.open('POST', 'https://central.titania.com.br/sites/all/files/paginas/getdoc.php', false);
