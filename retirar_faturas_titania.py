@@ -1,7 +1,7 @@
+from selenium.webdriver import Firefox
 import urllib.request, json 
 import re
 from time import sleep
-from selenium.webdriver import Firefox
 from datetime import datetime
 
 #Função para RETIRAR caracteres especiais de uma STRING.
@@ -83,28 +83,27 @@ mes = data_atual.month
 tbody = browser.find_element_by_css_selector('tbody')
 #ALTERAR FORMA DE ENCONTRAR O MÊS DE REFERENCIA.
 mes_titania = tbody.find_element_by_css_selector('td')
-mes_titania = int(mes_titania.text.split('/')[1].lstrip('0'))
-
-#Pegar o código do METODO POST.
-cod_boleto = tbody.find_element_by_css_selector('[class="btnboleto form-submit"]')
-cod_boleto = cod_boleto.get_attribute('onclick')
-cod_boleto = cod_boleto.split()
-cod_boleto = cod_boleto[0]
-cod_boleto = chr_remove(cod_boleto, "();'").strip('geturl_tela')
-
+if 'Nenhuma fatura encontrada' in mes_titania.text:
+    print('NENHUMA FATURA ENCONTRADA')
+else: 
+    mes_titania = int(mes_titania.text.split('/')[1].lstrip('0'))
+    cod_boleto = tbody.find_element_by_css_selector('[class="btnboleto form-submit"]')
+    cod_boleto = cod_boleto.get_attribute('onclick')
+    cod_boleto = cod_boleto.split()
+    cod_boleto = cod_boleto[0]
+    cod_boleto = chr_remove(cod_boleto, "();'").strip('geturl_tela')
 #logica para COMPARAR os dados e ABRIR a URL do PDF.
+    if mes == mes_titania:
+        jsrequest = ('''var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://central.titania.com.br/sites/all/files/paginas/getdoc.php', false);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    xhr.send('method=boleto&param={}&server=integrator_documents');
+    return xhr.response;'''.format(cod_boleto))
+    else:
+        print('MESÊS NÃO BATEM!!')
 
-if mes == mes_titania:
-    jsrequest = ('''var xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://central.titania.com.br/sites/all/files/paginas/getdoc.php', false);
-xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
-xhr.send('method=boleto&param={}&server=integrator_documents');
-return xhr.response;'''.format(cod_boleto))
-else:
-    print('MESÊS NÃO BATEM!!')
-
-result = browser.execute_script(jsrequest)
-url_titania = 'https://central.titania.com.br'
-url_pdf = url_titania + result
-browser.get(url_pdf)
+    result = browser.execute_script(jsrequest)
+    url_titania = 'https://central.titania.com.br'
+    url_pdf = url_titania + result
+    browser.get(url_pdf)
 
